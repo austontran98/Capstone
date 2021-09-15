@@ -6,8 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <p th:each="post : ${posts}">
-            <span th:text="${post}"> </span>
-        </p>
+<!--        <p <th:each="post : ${posts}">
+                                <span th:text="${post.id}">Teacher ID </span>
+                                <span th:text="${post.title}">Teacher First Name</span>
+                                <span th:text="${post.content}">Teacher Last Name</span>
+                                <span th:text="${post.authorId}">Teacher Specialty</span>
+                             
+
+        </p>-->
+
+   <p>Post: <span th:text="${posts}"></span></p>
     </body>
 </html>

@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/post")
 public class PostController {
     @Autowired
     PostRepository postRepo;
-    List<Post> posts;
+    
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -29,12 +30,24 @@ public class PostController {
         return savedPost;
     }
 
-    @GetMapping("/getPosts")
-    @ResponseStatus(HttpStatus.OK)
-    public String getAllPost(){
-        posts = postRepo.findAll();
-        System.out.println(posts);
-        return "posts";
+//    @GetMapping()
+//    public String getAllPost(Model model){
+//        
+//        
+//        return "posts";
+//    }
+
+    
+    @GetMapping()
+    public ModelAndView index (Model model) {
+        List<Post> posts = postRepo.findAll();
+        Post post = posts.get(0);
+        System.out.println(post);
+       
+        model.addAttribute("posts",post);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("posts");
+        return modelAndView;
     }
 
     @GetMapping("/{id}")

@@ -12,7 +12,7 @@ import java.util.Set;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    public Integer id;
     private String title;
     private String content;
     private Integer authorId;
