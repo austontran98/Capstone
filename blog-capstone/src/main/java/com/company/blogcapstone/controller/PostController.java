@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.ui.Model;
 
 @RestController
 @RequestMapping("/post")
 public class PostController {
     @Autowired
     PostRepository postRepo;
+    List<Post> posts;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -27,10 +29,12 @@ public class PostController {
         return savedPost;
     }
 
-    @GetMapping
+    @GetMapping("/getPosts")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> getAllPost(){
-        return postRepo.findAll();
+    public String getAllPost(){
+        posts = postRepo.findAll();
+        System.out.println(posts);
+        return "posts";
     }
 
     @GetMapping("/{id}")
@@ -55,4 +59,10 @@ public class PostController {
     public void deletePost(@PathVariable int id){
         postRepo.deleteById(id);
     }
+    
+//    @GetMapping("/posts")
+//    public String testConditional(Model model) {
+//        
+//        return "posts.html"; 
+//    }
 }
