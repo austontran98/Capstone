@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,7 +49,9 @@ public class PostController {
             newPost.getCategories().forEach(category -> category.getPosts().add(newPost));
         }
         
-        return index(model);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/post");
+        return modelAndView;
     }
 //    @GetMapping()
 //    public String getAllPost(Model model){
@@ -91,6 +94,15 @@ public class PostController {
         postRepo.deleteById(id);
     }
     
+    @RequestMapping("/delete")
+    public ModelAndView delete(@ModelAttribute(value="post2") Post newPost, Model model){
+        postRepo.delete(newPost);
+        
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/post");
+        return modelAndView;
+    }
+    //
 //    @GetMapping("/posts")
 //    public String testConditional(Model model) {
 //        

@@ -6,12 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <p th:each="post: ${postList}">
+        <div th:each="post: ${postList}">
             <b>ID: </b><span th:text="${post.id}"/> 
              <b>Title:</b> <span th:text="${post.title}" />
              <b>Content:</b> <span th:text="${post.title}" />
              <b>autorId:</b> <span th:text="${post.authorId}" />
-        </p>
+             
+             <form  th:action="@{/post/delete}" th:object="${post2}" method="post">
+                    <input type="hidden" name="id" th:value="${post.id}"/>
+                    <input type="hidden" name="title" th:value="${post.title}"/>
+                    <input type="hidden" name="content" th:value="${post.content}"/>
+                    <input type="hidden" name="authorId" th:value="${post.authorId}"/>
+                 <input type="submit" value="Delete"/>
+             </form>
+             
+        </div>
 
 <!--        <p>Post: <span th:text="${postList.get(0)}"></span></p>-->
     </body>
