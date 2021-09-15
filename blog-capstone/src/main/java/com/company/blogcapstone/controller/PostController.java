@@ -40,11 +40,9 @@ public class PostController {
     
     @GetMapping()
     public ModelAndView index (Model model) {
-        List<Post> posts = postRepo.findAll();
-        Post post = posts.get(0);
-        System.out.println(post);
+        System.out.println(postRepo.findAll());
        
-        model.addAttribute("posts",post);
+        model.addAttribute("postList",postRepo.findAll());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("posts");
         return modelAndView;
