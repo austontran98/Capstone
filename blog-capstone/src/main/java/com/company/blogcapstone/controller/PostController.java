@@ -30,6 +30,26 @@ public class PostController {
         return savedPost;
     }
 
+    
+    @GetMapping("/createPost")
+    public ModelAndView index2 (Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("postObject", new Post());
+        modelAndView.setViewName("createPost");
+        return modelAndView;
+    }
+    
+    @PostMapping("/createPost")
+    @ResponseBody
+    public ModelAndView index3 (Post newPost, Model model){
+        Post savedPost = postRepo.save(newPost);
+        final int postId = savedPost.getId();
+        if(newPost.getCategories() != null){
+            newPost.getCategories().forEach(category -> category.getPosts().add(newPost));
+        }
+        
+        return index(model);
+    }
 //    @GetMapping()
 //    public String getAllPost(Model model){
 //        
