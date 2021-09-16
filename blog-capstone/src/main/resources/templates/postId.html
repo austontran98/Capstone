@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Posts</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<p>
+    <b>ID: </b><span th:text="${postId.id}"/>
+    <b>Title:</b> <span th:text="${postId.title}" />
+    <b>Content:</b> <span th:text="${postId.title}" />
+    <b>authorId:</b> <span th:text="${postId.authorId}" />
+</p>
+
+<!--        <p>Post: <span th:text="${postList.get(0)}"></span></p>-->
+</body>
+</html>
