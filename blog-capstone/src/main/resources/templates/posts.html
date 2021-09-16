@@ -31,6 +31,10 @@
                                 <a class="nav-link" href="#">Contact Me</a>
                             </li>
                         </ul>
+                        <p th:if="${session.author != null}" class="pt-4 pr-3" style="font-size: 1.5rem;">
+                            <span>You are logged in as  </span>
+                            <span th:text="${session.author['firstName']}"></span>
+                        </p>
                         <ul  class="navbar-nav" style="font-size: 2rem;">
                             <li class="nav-item">
                                 <a class="nav-link" href="/authors/login">Login</a>
@@ -54,7 +58,7 @@
                 <p class="text-center">By author:  <a th:href="@{/author?id={authorId}(authorId=${post.authorId})}" th:text="${post.authorId}" /></p>
                 <p class="text-center">Category:  <a th:href="@{/category?name={categoryName}(categoryName=${post.categoryName})}" th:text="${post.categoryName}" /></p>
                 <p style="height: 5vh;"><span th:text="${post.content}" /></p>
-                
+
                 <form  th:action="@{/delete}" th:object="${post2}" method="post" class="d-inline">
                     <input type="hidden" name="id" th:value="${post.id}"/>
                     <input type="hidden" name="title" th:value="${post.title}"/>
