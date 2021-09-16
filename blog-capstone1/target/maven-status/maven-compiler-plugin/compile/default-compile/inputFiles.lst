@@ -1,0 +1,10 @@
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/dto/Category.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/controller/CategoryController.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/controller/AuthorController.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/BlogCapstoneApplication.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/dao/PostRepository.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/dto/Post.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/dao/CategoryRepository.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/dao/AuthorRepository.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/controller/PostController.java
+/Users/reyg/NetBeansProjects/Capstone/Capstone/blog-capstone/src/main/java/com/company/blogcapstone/dto/Author.java
