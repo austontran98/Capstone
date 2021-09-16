@@ -15,7 +15,7 @@ public class Category {
     private Integer id;
     private String name;
 
-    @ManyToMany(mappedBy = "postCategories")
+    @OneToMany(mappedBy = "categoryName", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Post> posts;
 
     public Integer getId() {
