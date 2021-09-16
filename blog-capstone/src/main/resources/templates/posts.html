@@ -20,6 +20,14 @@
                  <input type="submit" value="Delete"/>
              </form>
              
+             <form  th:action="@{/editPost}" th:object="${post}" method="get">
+                    <input type="hidden" name="id" th:value="${post.id}"/>
+                    <input type="hidden" name="title" th:value="${post.title}"/>
+                    <input type="hidden" name="content" th:value="${post.content}"/>
+                    <input type="hidden" name="authorId" th:value="${post.authorId}"/>
+                 <input type="submit" value="edit"/>
+             </form>
+             
         </div>
 
 <!--        <p>Post: <span th:text="${postList.get(0)}"></span></p>-->

@@ -55,7 +55,7 @@ public class PostController {
 
     @GetMapping()
     public ModelAndView index(Model model) {
-        System.out.println(postRepo.findAll());
+        //System.out.println(postRepo.findAll());
 
         model.addAttribute("postList", postRepo.findAll());
         ModelAndView modelAndView = new ModelAndView();
@@ -93,19 +93,19 @@ public class PostController {
     }
 
     @RequestMapping("/delete")
-    public ModelAndView delete(@ModelAttribute(value = "post2") Post newPost, Model model) {
-        postRepo.delete(newPost);
+    public ModelAndView delete(@ModelAttribute(value = "post2") Post deletePost, Model model) {
+        postRepo.delete(deletePost);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
     
-    @GetMapping("/editPost")
-    public ModelAndView edit(Model model){
+    @RequestMapping("/editPost")
+    public ModelAndView edit(@ModelAttribute(value="post") Post editPost, Model model){
         
         ModelAndView modelAndView = new ModelAndView();
-       // modelAndView.addObject("postObject", getPostById(10));
+        modelAndView.addObject("postObject", editPost);
         modelAndView.setViewName("editPost");
         return modelAndView;
         
