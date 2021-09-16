@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +18,6 @@ public class PostController {
 
     @Autowired
     PostRepository postRepo;
-    
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,33 +31,33 @@ public class PostController {
         return savedPost;
     }
 
-    
     @GetMapping("/createPost")
-    public ModelAndView index2 (Model model) {
+    public ModelAndView index2(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("postObject", new Post());
         modelAndView.setViewName("createPost");
         return modelAndView;
     }
-    
+
     @PostMapping("/createPost")
     @ResponseBody
-    public ModelAndView index3 (Post newPost, Model model){
+    public ModelAndView index3(Post newPost, Model model) {
         Post savedPost = postRepo.save(newPost);
         final int postId = savedPost.getId();
-        if(newPost.getCategories() != null){
+        if (newPost.getCategories() != null) {
             newPost.getCategories().forEach(category -> category.getPosts().add(newPost));
         }
-        
-        return index(model);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/post");
+        return modelAndView;
     }
 
-    
     @GetMapping()
-    public ModelAndView index (Model model) {
+    public ModelAndView index(Model model) {
         System.out.println(postRepo.findAll());
-       
-        model.addAttribute("postList",postRepo.findAll());
+
+        model.addAttribute("postList", postRepo.findAll());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("posts");
         return modelAndView;
@@ -85,5 +85,20 @@ public class PostController {
     public void deletePost(@PathVariable int id) {
         postRepo.deleteById(id);
     }
+
+    @RequestMapping("/delete")
+    public ModelAndView delete(@ModelAttribute(value = "post2") Post newPost, Model model) {
+        postRepo.delete(newPost);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/post");
+        return modelAndView;
+    }
+    //
+//    @GetMapping("/posts")
+//    public String testConditional(Model model) {
+//        
+//        return "posts.html"; 
+//    }
 
 }
