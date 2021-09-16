@@ -2,7 +2,6 @@ package com.company.blogcapstone.controller;
 
 import com.company.blogcapstone.dao.AuthorRepository;
 import com.company.blogcapstone.dto.Author;
-import com.company.blogcapstone.dto.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -62,20 +62,31 @@ public class AuthorController {
         return modelAndView;
     }
 
-    @PostMapping("login")
-    public ModelAndView addTeacher(@RequestParam String email, @RequestParam String password, HttpServletRequest request ) {
-        System.out.println(email);
-        System.out.println(password);
+    @PostMapping("/login")
+    public ModelAndView loginAuthorForm(@RequestParam String email, @RequestParam String password, Model model, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (email == null || email.isBlank() || password == null || password.isBlank()) {
+            model.addAttribute("notice", "Email address and password must be filled in order to login!");
+            modelAndView.setViewName("/login");
+            return modelAndView;
+        }
 
-        if (verifyEmail(email) && verifyPassword(password)) {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("redirect:/");
+        if (!verifyEmail(email)) {
+            model.addAttribute("notice", "Email address is not recognized!");
+            modelAndView.setViewName("/login");
             return modelAndView;
-        } else {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("login");
+        }
+
+        if (!verifyPassword(password)) {
+            model.addAttribute("notice", "Password is wrong!");
+            modelAndView.setViewName("/login");
             return modelAndView;
-        } 
+        }
+
+        Author author = getAllAuthors().stream().filter((a) -> a.getEmail().toLowerCase().equals(email.toLowerCase())).findFirst().get();
+        request.getSession().setAttribute("author", author);
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
     }
 
     private boolean verifyEmail(String email) {
