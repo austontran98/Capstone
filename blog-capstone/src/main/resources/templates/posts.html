@@ -41,7 +41,7 @@
             </nav>
 
             <div th:each="post: ${postList}" class="mt-4">
-                <h3 class="text-center"><span th:text="${post.title}" /></h3>
+                <h3 class="text-center"><a th:href="@{/{postId}(postId=${post.id})}" th:text="${post.title}" /></h3>
                 <p class="text-center">By author:  <span th:text="${post.authorId}" /></p>
                 <p style="height: 5vh;"><span th:text="${post.content}" /></p>
                 
