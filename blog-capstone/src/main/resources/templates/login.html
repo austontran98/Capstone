@@ -20,7 +20,7 @@
             </div>
             <div class="px-5">     
                 <h2 class="text-center">AUTHOR LOGIN</h2>
-                
+
                 <form action="#" th:action="@{/author/login}" method="POST" class="px-5">
                     <div class="form-group row" >
                         <label for="emailLogin">Email address</label>
@@ -31,9 +31,11 @@
                         <label for="PasswordLogin">Password</label>
                         <input type="text"  th:value="${password}" name="password"  class="form-control" id="PasswordLogin" placeholder="Password">
                     </div>
-                   
-                    <button type="submit" class="btn btn-primary">Login</button>
+
+                    <button type="submit" class="btn btn-primary ">Login</button>
+                    <button href="/" type="submit" class="btn btn-primary ml-5">Cancel</button>
                 </form>
+
             </div>
 
             <!-- Footer -->
