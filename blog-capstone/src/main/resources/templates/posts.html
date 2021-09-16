@@ -40,6 +40,8 @@
                 </div>
             </nav>
 
+            <a th:href="@{/}">Reset Search</a>
+
             <div th:each="post: ${postList}" class="mt-4">
                 <h3 class="text-center"><a th:href="@{/{postId}(postId=${post.id})}" th:text="${post.title}" /></h3>
                 <p class="text-center">By author:  <a th:href="@{/author?id={authorId}(authorId=${post.authorId})}" th:text="${post.authorId}" /></p>
