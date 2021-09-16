@@ -62,16 +62,40 @@ public class AuthorController {
         return modelAndView;
     }
 
-    @PostMapping("loginAuthor")
-    public ModelAndView addTeacher(HttpServletRequest request) {
-        String email = request.getParameter("emailLogin");
-        String password = request.getParameter("passwordLogin");
-        
-        List<Author> author = getAllAuthors();
-        
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/post");
-        
-        return modelAndView;
+    @PostMapping("login")
+    public ModelAndView addTeacher(@RequestParam String email, @RequestParam String password, HttpServletRequest request ) {
+        System.out.println(email);
+        System.out.println(password);
+
+        if (verifyEmail(email) && verifyPassword(password)) {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("redirect:/");
+            return modelAndView;
+        } else {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("login");
+            return modelAndView;
+        } 
     }
+
+    private boolean verifyEmail(String email) {
+        List<Author> authors = getAllAuthors();
+        for (Author author : authors) {
+            if (author.getEmail().toLowerCase().contains(email.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean verifyPassword(String password) {
+        List<Author> authors = getAllAuthors();
+        for (Author author : authors) {
+            if (author.getPassword().toLowerCase().contains(password.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

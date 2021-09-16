@@ -17,6 +17,7 @@ public class PostController {
 
     @Autowired
     PostRepository postRepo;
+    
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -30,13 +31,35 @@ public class PostController {
         return savedPost;
     }
 
-    @GetMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public ModelAndView getAllPost(Model model) {
-        List<Post> posts = postRepo.findAll();
-        model.addAllAttributes(posts);
+    
+    @GetMapping("/createPost")
+    public ModelAndView index2 (Model model) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("post");
+        modelAndView.addObject("postObject", new Post());
+        modelAndView.setViewName("createPost");
+        return modelAndView;
+    }
+    
+    @PostMapping("/createPost")
+    @ResponseBody
+    public ModelAndView index3 (Post newPost, Model model){
+        Post savedPost = postRepo.save(newPost);
+        final int postId = savedPost.getId();
+        if(newPost.getCategories() != null){
+            newPost.getCategories().forEach(category -> category.getPosts().add(newPost));
+        }
+        
+        return index(model);
+    }
+
+    
+    @GetMapping()
+    public ModelAndView index (Model model) {
+        System.out.println(postRepo.findAll());
+       
+        model.addAttribute("postList",postRepo.findAll());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("posts");
         return modelAndView;
     }
 
@@ -62,4 +85,5 @@ public class PostController {
     public void deletePost(@PathVariable int id) {
         postRepo.deleteById(id);
     }
+
 }
