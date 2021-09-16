@@ -20,7 +20,7 @@ public class Author {
     @Email(message = "Email should be valid")
     private String email;
     private String password;
-
+    
     @OneToMany(mappedBy = "authorId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Post> posts;
 
