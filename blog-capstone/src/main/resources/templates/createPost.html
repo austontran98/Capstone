@@ -21,25 +21,24 @@
             </div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <img src="../images/logo.png" alt="" height="60">
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav mr-auto" style="font-size: 2rem;">
-                                <li class="nav-item" >
-                                    <a class="nav-link active"  href="/">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/createPost">Add Post</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Contact Me</a>
-                                </li>
-                            </ul>
-                            <ul  class="navbar-nav" style="font-size: 2rem;">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/authors/login">Login</a>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mr-auto" style="font-size: 2rem;">
+                            <li class="nav-item" >
+                                <a class="nav-link active"  href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/createPost">Add Post</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact Me</a>
+                            </li>
+                        </ul>
+                        <ul  class="navbar-nav" style="font-size: 2rem;">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/authors/login">Login</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
 
@@ -76,11 +75,11 @@
                             });
                         </script>
                     </div>
-                     <div class="form-group row" >
+                    <div class="form-group row" >
                         <label for="authorId">Author ID</label>
                         <input type="text" th:field="*{authorId}" name="authorId" class="form-control" id="authorId" placeholder="Enter Author ID">
                     </div>
-                     <input type="submit" class="btn btn-primary " value="Submit" /> <input type="reset" class="btn btn-primary ml-5" value="Reset" />
+                    <input type="submit" class="btn btn-primary " value="Submit" /> <input type="reset" class="btn btn-primary ml-5" value="Reset" />
                 </form> 
                 <!--  <form action="#" th:action="@{/createPost}" th:object="${postObject}" method="post" target="postObject">
                   <p>Id: <input type="text" th:field="*{id}" /></p>
