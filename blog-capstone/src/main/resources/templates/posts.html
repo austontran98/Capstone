@@ -40,11 +40,13 @@
                 </div>
             </nav>
             
-            <p> categories</p>
-            <div th:each="category: ${categoriesList}" class="mt-4">
-                <a th:href="@{/category?name={category}(category=${category})}" th:text="${category}" /></p>
-            </div>
+            <b> categories</b>
 
+
+            <div class="list-group">
+                <a th:each="category: ${categoriesList}" th:href="@{/category?name={category}(category=${category})}" th:text="${category}"></a>
+            </div>
+            <hr>
             <a th:href="@{/}">Reset Search</a>
 
             <div th:each="post: ${postList}" class="mt-4">
