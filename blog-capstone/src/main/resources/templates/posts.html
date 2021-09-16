@@ -43,10 +43,18 @@
                     </div>
                 </div>
             </nav>
+            
+            <p> categories</p>
+            <div th:each="category: ${categoriesList}" class="mt-4">
+                <a th:href="@{/category?name={category}(category=${category})}" th:text="${category}" /></p>
+            </div>
+
+            <a th:href="@{/}">Reset Search</a>
 
             <div th:each="post: ${postList}" class="mt-4">
-                <h3 class="text-center"><span th:text="${post.title}" /></h3>
-                <p class="text-center">By author:  <span th:text="${post.authorId}" /></p>
+                <h3 class="text-center"><a th:href="@{/{postId}(postId=${post.id})}" th:text="${post.title}" /></h3>
+                <p class="text-center">By author:  <a th:href="@{/author?id={authorId}(authorId=${post.authorId})}" th:text="${post.authorId}" /></p>
+                <p class="text-center">Category:  <a th:href="@{/category?name={categoryName}(categoryName=${post.categoryName})}" th:text="${post.categoryName}" /></p>
                 <p style="height: 5vh;"><span th:text="${post.content}" /></p>
 
                 <form  th:action="@{/delete}" th:object="${post2}" method="post" class="d-inline">
@@ -54,6 +62,7 @@
                     <input type="hidden" name="title" th:value="${post.title}"/>
                     <input type="hidden" name="content" th:value="${post.content}"/>
                     <input type="hidden" name="authorId" th:value="${post.authorId}"/>
+                    <input type="hidden" name="categoryName" th:value="${post.categoryName}"/>
                     <input type="submit" value="Delete"/>
                 </form>
 
@@ -62,9 +71,12 @@
                     <input type="hidden" name="title" th:value="${post.title}"/>
                     <input type="hidden" name="content" th:value="${post.content}"/>
                     <input type="hidden" name="authorId" th:value="${post.authorId}"/>
+                    <input type="hidden" name="categoryName" th:value="${post.categoryName}"/>
                     <input type="submit" value="Edit"/>
                 </form>
             </div>
+            
+            
 
             <!--   <div th:each="post: ${postList}">
                  <b>ID: </b><span th:text="${post.id}"/> 
