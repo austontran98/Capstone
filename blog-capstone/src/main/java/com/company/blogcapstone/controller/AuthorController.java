@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/author")
+@RequestMapping("/authors")
 public class AuthorController {
 
     @Autowired

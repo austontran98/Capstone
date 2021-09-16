@@ -46,7 +46,12 @@ public class Post {
     }
 
     public void setContent(String content) {
-        this.content = content;
+         if(content.contains("<p>")){
+            this.content = content.substring(3, content.length() - 4);
+        }else
+        {
+            this.content = content;
+        }
     }
 
     public Integer getAuthorId() {

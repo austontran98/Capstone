@@ -49,7 +49,7 @@ public class PostController {
         }
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/post");
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
@@ -65,13 +65,19 @@ public class PostController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Post getPostById(@PathVariable int id) {
+    public ModelAndView getPostById(Model model, @PathVariable int id){
         Optional<Post> post = postRepo.findById(id);
-        if (post.isPresent()) {
-            return post.get();
+        Post returnedPost;
+        if(post.isPresent()){
+            returnedPost = post.get();
         } else {
-            return null;
+            returnedPost = null;
         }
+
+        model.addAttribute("postId", returnedPost);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("postId");
+        return modelAndView;
     }
 
     @PutMapping
@@ -91,7 +97,41 @@ public class PostController {
         postRepo.delete(newPost);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/post");
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
+    }
+    
+    @GetMapping("/editPost")
+    public ModelAndView edit(Model model){
+        
+        ModelAndView modelAndView = new ModelAndView();
+       // modelAndView.addObject("postObject", getPostById(10));
+        modelAndView.setViewName("editPost");
+        return modelAndView;
+        
+    }
+     
+    @PostMapping("/editPost")
+    @ResponseBody
+    public ModelAndView edit1 (Post newPost, Model model){
+        Post savedPost = postRepo.save(newPost);
+        final int postId = savedPost.getId();
+        if(newPost.getCategories() != null){
+            newPost.getCategories().forEach(category -> category.getPosts().add(newPost));
+        }
+        
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
+    }
+    
+    @GetMapping("/author")
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView getPostByAuthorId(Model model, @RequestParam int id){
+        List<Post> postByAuthor = postRepo.findByAuthorId(id);
+        model.addAttribute("postList", postByAuthor);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("posts");
         return modelAndView;
     }
     //
